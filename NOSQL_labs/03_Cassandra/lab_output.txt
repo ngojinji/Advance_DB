@@ -1,0 +1,199 @@
+### Buoc 0
+Datacenter: datacenter1
+=======================
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address     Load        Tokens  Owns (effective)  Host ID                               Rack 
+UN  172.22.0.2  119.83 KiB  16      64.7%             574d420c-63f5-4fd1-9006-d68f0818e4eb  rack1
+UN  172.22.0.3  85.1 KiB    16      59.3%             d6f01a88-51fe-4d83-aa95-b6a055f17d85  rack1
+UN  172.22.0.4  114.62 KiB  16      76.0%             5311b794-e724-4ae5-9c3d-89d2abf9f26d  rack1
+
+/03_cassandra-cass1-1 172.22.0.2
+/03_cassandra-cass2-1 172.22.0.3
+/03_cassandra-cass3-1 172.22.0.4
+loaded 3000 rows for 30 sensors
+
+### Buoc 1
+
+ sensor_id | system.token(sensor_id)
+-----------+-------------------------
+     hn-03 |    -8984315552405299777
+     hn-25 |    -8817872159077109992
+     hn-06 |    -7924508634524167123
+     hn-01 |    -6927399588689370405
+     hn-17 |    -6045903059860167966
+
+(5 rows)
+$ nodetool getendpoints iot readings_by_sensor hn-01
+172.22.0.4
+172.22.0.3
+172.22.0.2
+hn-01 -> 172.22.0.4
+hn-02 -> 172.22.0.3
+hn-03 -> 172.22.0.3
+hn-04 -> 172.22.0.4
+hn-05 -> 172.22.0.3
+hn-06 -> 172.22.0.4
+$ nodetool status ring1
+Datacenter: datacenter1
+=======================
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address     Load        Tokens  Owns (effective)  Host ID                               Rack 
+UN  172.22.0.2  108.01 KiB  16      32.7%             574d420c-63f5-4fd1-9006-d68f0818e4eb  rack1
+UN  172.22.0.3  113.02 KiB  16      31.6%             d6f01a88-51fe-4d83-aa95-b6a055f17d85  rack1
+UN  172.22.0.4  120.17 KiB  16      35.7%             5311b794-e724-4ae5-9c3d-89d2abf9f26d  rack1
+
+$ nodetool status iot
+Datacenter: datacenter1
+=======================
+Status=Up/Down
+|/ State=Normal/Leaving/Joining/Moving
+--  Address     Load        Tokens  Owns (effective)  Host ID                               Rack 
+UN  172.22.0.2  108.01 KiB  16      100.0%            574d420c-63f5-4fd1-9006-d68f0818e4eb  rack1
+UN  172.22.0.3  113.02 KiB  16      100.0%            d6f01a88-51fe-4d83-aa95-b6a055f17d85  rack1
+UN  172.22.0.4  120.17 KiB  16      100.0%            5311b794-e724-4ae5-9c3d-89d2abf9f26d  rack1
+
+$ nodetool ring
+
+Datacenter: datacenter1
+==========
+Address          Rack        Status State   Load            Owns                Token                                       
+                                                                                8914328884962042261                         
+172.22.0.4       rack1       Up     Normal  120.17 KiB      ?                   -9037076075632347381                        
+172.22.0.3       rack1       Up     Normal  125.22 KiB      ?                   -8732586518086379072                        
+172.22.0.4       rack1       Up     Normal  120.17 KiB      ?                   -8372567373455089306                        
+172.22.0.2       rack1       Up     Normal  108.01 KiB      ?                   -8092146958844926116                        
+172.22.0.4       rack1       Up     Normal  120.17 KiB      ?                   -7710435867152848070                        
+172.22.0.3       rack1       Up     Normal  125.22 KiB      ?                   -7474165926942726038                        
+172.22.0.2       rack1       Up     Normal  108.01 KiB      ?                   -7020646342504893303                        
+172.22.0.4       rack1       Up     Normal  120.17 KiB      ?                   -6648083467482496530                        
+172.22.0.3       rack1       Up     Normal  125.22 KiB      ?                   -6409824937169662641                        
+172.22.0.2       rack1       Up     Normal  108.01 KiB      ?                   -6002794937762466287                        
+172.22.0.4       rack1       Up     Normal  120.17 KiB      ?                   -5509956928092601538                        
+172.22.0.2       rack1       Up     Normal  108.01 KiB      ?                   -5185123005150115493                        
+172.22.0.3       rack1       Up     Normal  125.22 KiB      ?                   -4589820636189716242                        
+172.22.0.2       rack1       Up     Normal  108.01 KiB      ?                   -4109367123924535953                        
+172.22.0.4       rack1       Up     Normal  120.17 KiB      ?                   -3678041199137518854                        
+172.22.0.2       rack1       Up     Normal  108.01 KiB      ?                   -3373451431213642312                        
+172.22.0.4       rack1       Up     Normal  120.17 KiB      ?                   -2963745734739857861                        
+172.22.0.3       rack1       Up     Normal  125.22 KiB      ?                   -2712756306676730213                        
+172.22.0.2       rack1       Up     Normal  108.01 KiB      ?                   -2294078623766040655                        
+172.22.0.4       rack1       Up     Normal  120.17 KiB      ?                   -1846507283868160267                        
+172.22.0.3       rack1       Up     Normal  125.22 KiB      ?                   -1543801383497715833                        
+172.22.0.2       rack1       Up     Normal  108.01 KiB      ?                   -1050558618085448681                        
+172.22.0.3       rack1       Up     Normal  125.22 KiB      ?                   -494677583168524745                         
+172.22.0.2       rack1       Up     Normal  108.01 KiB      ?                   -83194375006913183                          
+172.22.0.3       rack1       Up     Normal  125.22 KiB      ?                   441235589622990673                          
+172.22.0.3       rack1       Up     Normal  125.22 KiB      ?                   856873249194630553                          
+172.22.0.4       rack1       Up     Normal  120.17 KiB      ?                   1225216440821405871                         
+172.22.0.2       rack1       Up     Normal  108.01 KiB      ?                   1506810177506985454                         
+172.22.0.3       rack1       Up     Normal  125.22 KiB      ?                   2068553595866611698                         
+172.22.0.3       rack1       Up     Normal  125.22 KiB      ?                   2465876448215324489                         
+172.22.0.4       rack1       Up     Normal  120.17 KiB      ?                   2857697404825669922                         
+172.22.0.2       rack1       Up     Normal  108.01 KiB      ?                   3125833473204028751                         
+172.22.0.4       rack1       Up     Normal  120.17 KiB      ?                   3490681228298804045                         
+172.22.0.3       rack1       Up     Normal  125.22 KiB      ?                   3724297164160767577                         
+172.22.0.2       rack1       Up     Normal  108.01 KiB      ?                   4103978925720142827                         
+172.22.0.4       rack1       Up     Normal  120.17 KiB      ?                   4468572084692292709                         
+172.22.0.3       rack1       Up     Normal  125.22 KiB      ?                   4758597810836171944                         
+172.22.0.3       rack1       Up     Normal  125.22 KiB      ?                   5184884312117301334                         
+172.22.0.4       rack1       Up     Normal  120.17 KiB      ?                   5615895793047969417                         
+172.22.0.2       rack1       Up     Normal  108.01 KiB      ?                   5882613226543729955                         
+172.22.0.4       rack1       Up     Normal  120.17 KiB      ?                   6282826541968910253                         
+172.22.0.3       rack1       Up     Normal  125.22 KiB      ?                   6535086138691979217                         
+172.22.0.2       rack1       Up     Normal  108.01 KiB      ?                   6978655126778668244                         
+172.22.0.4       rack1       Up     Normal  120.17 KiB      ?                   7340383226658958811                         
+172.22.0.3       rack1       Up     Normal  125.22 KiB      ?                   7592462655620937434                         
+172.22.0.2       rack1       Up     Normal  108.01 KiB      ?                   8069952237470880503                         
+172.22.0.4       rack1       Up     Normal  120.17 KiB      ?                   8582821541339090964                         
+172.22.0.2       rack1       Up     Normal  108.01 KiB      ?                   8914328884962042261                         
+
+  Warning: "nodetool ring" is used to output all the tokens of a node.
+  To view status related info of a node use "nodetool status" instead.
+
+
+  Note: Non-system keyspaces don't have the same replication settings, effective ownership information is meaningless
+
+
+ system.token('hn-01') | system.token('hn-02')
+-----------------------+-----------------------
+  -6927399588689370405 |   1779598930076072019
+
+(1 rows)
+
+### Buoc 2
+<stdin>:1:InvalidRequest: Error from server: code=2200 [Invalid query] message="Cannot execute this query as it might involve data filtering and thus may have unpredictable performance. If you want to execute this query despite the performance unpredictability, use ALLOW FILTERING"
+--- by partition key
+                                                        Executing single-partition query on readings_by_sensor [ReadStage-1] | 2026-11-17 12:54:24.227000 | 172.22.0.2 |          10461 | 127.0.0.1
+                                                                        Read 3 live rows and 0 tombstone cells [ReadStage-1] | 2026-11-17 12:54:24.229001 | 172.22.0.2 |          12078 | 127.0.0.1
+                                                                                                            Request complete | 2026-11-17 12:54:24.231167 | 172.22.0.2 |          13167 | 127.0.0.1
+--- ALLOW FILTERING
+ count
+   131
+ Parsing SELECT count(*) FROM iot.readings_by_sensor WHERE temperature > 31.5 ALLOW FILTERING; [Native-Transport-Requests-10] | 2026-11-17 12:54:26.309001 | 172.22.0.2 |            737 | 127.0.0.1
+  Submitting range requests on 49 ranges with a concurrency of 1 (0.0 rows per range expected) [Native-Transport-Requests-10] | 2026-11-17 12:54:26.316001 | 172.22.0.2 |           7739 | 127.0.0.1
+                                                         Submitted 1 concurrent range requests [Native-Transport-Requests-10] | 2026-11-17 12:54:26.318000 | 172.22.0.2 |           9218 | 127.0.0.1
+                Executing seq scan across 0 sstables for (min(-9223372036854775808), min(-9223372036854775808)] [ReadStage-1] | 2026-11-17 12:54:26.318001 | 172.22.0.2 |           9438 | 127.0.0.1
+                                                                      Read 2208 live rows and 0 tombstone cells [ReadStage-1] | 2026-11-17 12:54:26.354000 | 172.22.0.2 |          45346 | 127.0.0.1
+  Submitting range requests on 16 ranges with a concurrency of 1 (0.0 rows per range expected) [Native-Transport-Requests-10] | 2026-11-17 12:54:26.372000 | 172.22.0.2 |          63100 | 127.0.0.1
+                                                         Submitted 1 concurrent range requests [Native-Transport-Requests-10] | 2026-11-17 12:54:26.372001 | 172.22.0.2 |          63687 | 127.0.0.1
+                                    Executing seq scan across 0 sstables for [hn-23, min(-9223372036854775808)] [ReadStage-1] | 2026-11-17 12:54:26.373000 | 172.22.0.2 |          64028 | 127.0.0.1
+                                                                       Read 792 live rows and 0 tombstone cells [ReadStage-1] | 2026-11-17 12:54:26.378000 | 172.22.0.2 |          69386 | 127.0.0.1
+                                                                                                             Request complete | 2026-11-17 12:54:26.381739 | 172.22.0.2 |          72739 | 127.0.0.1
+
+### Buoc 3
+--- 3 node song
+ONE     OK    (rows for cl-test: 1)
+QUORUM  OK    (rows for cl-test: 2)
+ALL     OK    (rows for cl-test: 3)
+ Container 03_cassandra-cass3-1 Stopped 
+UN  172.22.0.2  108.01 KiB  16      ?     574d420c-63f5-4fd1-9006-d68f0818e4eb  rack1
+UN  172.22.0.3  125.22 KiB  16      ?     d6f01a88-51fe-4d83-aa95-b6a055f17d85  rack1
+DN  172.22.0.4  120.17 KiB  16      ?     5311b794-e724-4ae5-9c3d-89d2abf9f26d  rack1
+--- tat cass3
+ONE     OK    (rows for cl-test: 4)
+QUORUM  OK    (rows for cl-test: 5)
+ALL     FAIL  Unavailable: need 3 replicas, 2 alive
+ Container 03_cassandra-cass2-1 Stopped 
+UN  172.22.0.2  108.01 KiB  16      ?     574d420c-63f5-4fd1-9006-d68f0818e4eb  rack1
+DN  172.22.0.3  125.22 KiB  16      ?     d6f01a88-51fe-4d83-aa95-b6a055f17d85  rack1
+DN  172.22.0.4  120.17 KiB  16      ?     5311b794-e724-4ae5-9c3d-89d2abf9f26d  rack1
+--- tat them cass2
+ONE     OK    (rows for cl-test: 6)
+QUORUM  FAIL  Unavailable: need 2 replicas, 1 alive
+ALL     FAIL  Unavailable: need 3 replicas, 1 alive
+
+### Buoc 4
+ Container 03_cassandra-cass2-1 Started 
+$ statushandoff cass1/cass2:
+Hinted handoff is not running
+Hinted handoff is not running
+--- ghi hn-99 QUORUM khi cass3 tat
+Consistency level set to QUORUM.
+ Container 03_cassandra-cass3-1 Started 
+ Container 03_cassandra-cass1-1 Stopped 
+--- doc ONE tu cass3 (cass1, cass2 tat)
+Consistency level set to ONE.
+
+ sensor_id | ts | humidity | temperature
+-----------+----+----------+-------------
+
+
+(0 rows)
+ Container 03_cassandra-cass2-1 Started 
+--- doc ALL tu cass3
+Consistency level set to ALL.
+
+ sensor_id | ts                              | humidity | temperature
+-----------+---------------------------------+----------+-------------
+     hn-99 | 2026-11-01 09:00:00.000000+0000 |       30 |          41
+
+(1 rows)
+--- repair
+[2026-11-17 12:57:44,698] Repair command #1 finished in 1 second
+[2026-11-17 12:57:44,715] condition satisfied queried for parent session status and discovered repair completed.
+[2026-11-17 12:57:44,715] Repair completed successfully
+$ statushandoff sau khi khoi dong lai:
+Hinted handoff is running
+Hinted handoff is running

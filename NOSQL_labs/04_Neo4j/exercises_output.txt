@@ -1,0 +1,64 @@
+--- Bai 1 ---
+so nguoi: 9
+ban truc tiep cua Linh:
+   {'name': 'Nam', 'city': 'Da Nang'}
+   {'name': 'Tuan', 'city': 'Hanoi'}
+ban cua ban cua Linh dang song o Hanoi:
+   {'name': 'Duc', 'city': 'Hanoi'}
+   {'name': 'Mai', 'city': 'Hanoi'}
+   {'name': 'Quang', 'city': 'Hanoi'}
+
+--- Bai 2 ---
+goi y sach cho Mai (ban cua Mai mua, Mai chua mua):
+   {'recommendation': 'SQL in Practice', 'from_friends': ['Nam'], 'score': 1}
+goi y kieu 'nguoi mua cung sach voi Mai cung mua':
+   {'recommendation': 'SQL in Practice', 'also_bought': 2}
+tong tien moi nguoi da chi:
+   {'person': 'Nam', 'books': 2, 'spent': 285000}
+   {'person': 'Linh', 'books': 2, 'spent': 270000}
+   {'person': 'Mai', 'books': 2, 'spent': 255000}
+   {'person': 'Duc', 'books': 0, 'spent': 0}
+   {'person': 'Hung', 'books': 0, 'spent': 0}
+   {'person': 'Quang', 'books': 0, 'spent': 0}
+   {'person': 'Thao', 'books': 0, 'spent': 0}
+   {'person': 'Tuan', 'books': 0, 'spent': 0}
+   {'person': 'Vy', 'books': 0, 'spent': 0}
+
+--- Bai 3 ---
+15 ga, 15 doan NEXT
+Cat Linh -> Yen Nghia: 8 doan, 31 phut
+    Cat Linh -> La Thanh -> Thai Ha -> Lang -> Cau Giay -> Nguyen Trai -> Van Quan -> Ha Dong -> Yen Nghia
+Nhon -> Ha Dong: 4 doan, 25 phut
+    Nhon -> Cau Giay -> Nguyen Trai -> Van Quan -> Ha Dong
+Ga Ha Noi -> Van Quan: 5 doan, 24 phut
+    Ga Ha Noi -> Kim Ma -> Lang -> Cau Giay -> Nguyen Trai -> Van Quan
+tat ca tuyen ngan nhat Nhon -> Ha Dong:
+    Nhon -> Cau Giay -> Nguyen Trai -> Van Quan -> Ha Dong (25 phut)
+
+--- Bai 4 ---
+Cach 1 - property tren relationship:
+ ai dang lam o Viettel:
+   {'name': 'Mai', 'title': 'Tester', 'since': '2023-02-01'}
+   {'name': 'Linh', 'title': 'Data Engineer', 'since': '2024-09-01'}
+ nhung ai tung lam cung luc o FPT voi Linh:
+   {'colleague': 'Nam', 'company': 'FPT'}
+Cach 2 - node trung gian :Job:
+ lich su cong viec cua Linh:
+   {'title': 'Intern', 'company': 'FPT', 'start': '2022-06-01', 'end': '2022-12-31'}
+   {'title': 'Data Analyst', 'company': 'FPT', 'start': '2023-01-01', 'end': '2024-08-31'}
+   {'title': 'Data Engineer', 'company': 'Viettel', 'start': '2024-09-01', 'end': None}
+ thang chuc va quan ly (chi lam duoc khi Job la node):
+   {'person': 'Linh', 'from_title': 'Intern', 'to_title': 'Data Analyst'}
+   {'person': 'Nam', 'title': 'Developer', 'manager': 'Hung'}
+
+--- Bai 5 ---
+TRUOC khi tao constraint:
+   ProduceResults         rows=1 dbHits=4  p
+   Filter                 rows=1 dbHits=9  p.name = $autostring_0
+   NodeByLabelScan        rows=9 dbHits=10  p:Person
+   tong db hits: 23
+SAU khi tao constraint:
+   ProduceResults         rows=1 dbHits=3  p
+   NodeUniqueIndexSeek    rows=1 dbHits=2  UNIQUE p:Person(name) WHERE name = $autostring_0, cache[p.name]
+   tong db hits: 5
+tao them mot Linh nua -> ConstraintError

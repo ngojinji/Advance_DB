@@ -1,0 +1,61 @@
+=== Buoc 1 ===
+naive lan 1: winners = 4
+naive lan 2: winners = 18
+naive lan 3: winners = 19
+naive lan 4: winners = 19
+naive lan 5: winners = 20
+SET NX lan 1: winners = 1
+SET NX lan 2: winners = 1
+SET NX lan 3: winners = 1
+SET NX lan 4: winners = 1
+SET NX lan 5: winners = 1
+TTL hold:c1:A1 = 300
+TTL sau 2s     = 298
+giu A1 voi TTL 2s, ton tai: True
+sau 2.5s, ton tai: False
+
+=== Buoc 2 ===
+True
+False
+False
+True
+False
+{'A1': 'sold', 'A2': 'free'}
+True False True
+{'A1': 'sold', 'A2': 'free'}
+SMEMBERS sold:c1 = {'A1'}
+
+=== Buoc 3 ===
+DECR lan 1: sold=100 stock=0 buyers=100
+DECR lan 2: sold=100 stock=0 buyers=100
+DECR lan 3: sold=100 stock=0 buyers=100
+GET roi DECR lan 1: sold=116 stock=-16 buyers=116
+GET roi DECR lan 2: sold=110 stock=-10 buyers=110
+GET roi DECR lan 3: sold=108 stock=-8 buyers=108
+
+=== Buoc 4 ===
+fixed 8 request: [True, True, True, True, True, False, False, False]
+fixed o ranh gioi:   [True, True, True, True, True, True, True, True, True, True] -> 10 request duoc qua
+sliding 8 request: [True, True, True, True, True, False, False, False]
+sliding o ranh gioi: [True, True, True, True, True, False, False, False, False, False] -> 5 request duoc qua
+try_hold 7 lan: ['ok', 'taken', 'taken', 'taken', 'taken', 'rate_limited', 'rate_limited']
+
+=== Buoc 5 ===
+u1 1
+u2 2
+u3 3
+1
+['u1', 'u2']
+1
+
+=== Buoc 6 ===
+lan 1: 20 20 20
+lan 2: 20 20 20
+lan 3: 20 20 20
+lan 4: 20 20 20
+lan 5: 20 20 20
+lan 6: 20 20 20
+lan 7: 20 20 20
+lan 8: 20 20 20
+lan 9: 20 20 20
+lan 10: 20 20 20

@@ -1,0 +1,45 @@
+=== Vi du them ===
+loaded: {'Course': 13, 'Student': 10}
+prerequisite_chain('CAP401') = [('DB301', 1), ('ML201', 1), ('CS102', 2), ('DB201', 2), ('MATH102', 2), ('STAT101', 2), ('CS101', 3), ('MATH101', 3)]
+eligible_courses('S04') = ['CS102', 'MATH102', 'STAT101']
+connection('S03', 'S05') = ['Chi', 'Minh', 'Phuong', 'Khoa', 'Giang']
+suggest_friends('S08') = [('An', 1), ('Binh', 1), ('Chi', 1)]
+bottleneck_courses(5) = [('CS101', 9), ('CS102', 7), ('MATH101', 7), ('STAT101', 5), ('MATH102', 4)]
+record_pass('S99', 'CS101', 8.0) -> ValueError: unknown student or course: S99, CS101
+record_pass('S01', 'XX999', 8.0) -> ValueError: unknown student or course: S01, XX999
+
+=== Cau 1: SQL WITH RECURSIVE (sqlite) ===
+DE301 [('CS102', 1), ('DB201', 1), ('CS101', 2)]
+CAP401 [('DB301', 1), ('ML201', 1), ('CS102', 2), ('DB201', 2), ('MATH102', 2), ('STAT101', 2), ('CS101', 3), ('MATH101', 3)]
+
+=== Cau 2: so duong di CAP401 -> CS101 ===
+CAP401 -> ML201 -> CS102 -> CS101 (do dai 3)
+CAP401 -> DB301 -> DB201 -> CS102 -> CS101 (do dai 4)
+tong so duong di: 2
+so hang truoc khi gom: 11 | sau khi gom theo mon: 8
+
+=== Cau 3: PROFILE Task 3 voi S01 ===
+loaded: {'Course': 13, 'Student': 10}
+CO constraint:
+  cac operator: ['ProduceResults', 'Sort', 'Projection', 'AntiSemiApply', 'AntiSemiApply', 'CartesianProduct', 'NodeUniqueIndexSeek', 'NodeByLabelScan', 'Expand(Into)', 'Argument', 'Filter', 'AntiSemiApply', 'Expand(All)', 'Argument', 'Expand(Into)', 'Argument']
+  operator dau tien (la): [('NodeUniqueIndexSeek', 'UNIQUE s:Student(id) WHERE id = $sid'), ('NodeByLabelScan', 'c:Course'), ('Argument', 's, c'), ('Argument', 's, c'), ('Argument', 's, p')]
+  tong db hits: 194
+KHONG constraint student_id:
+  cac operator: ['ProduceResults', 'Sort', 'Projection', 'AntiSemiApply', 'AntiSemiApply', 'CartesianProduct', 'Filter', 'NodeByLabelScan', 'NodeByLabelScan', 'Expand(Into)', 'Argument', 'Filter', 'AntiSemiApply', 'Expand(All)', 'Argument', 'Expand(Into)', 'Argument']
+  operator dau tien (la): [('NodeByLabelScan', 's:Student'), ('NodeByLabelScan', 'c:Course'), ('Argument', 's, c'), ('Argument', 's, c'), ('Argument', 's, p')]
+  tong db hits: 213
+da tao lai constraint student_id
+
+=== Cau 4: luu FRIEND ca hai chieu ===
+loaded: {'Course': 13, 'Student': 10}
+so relationship FRIEND: 22
+connection('S01', 'S08') = ['An', 'Binh', 'Dung', 'Lan']
+suggest_friends('S02') = [('Minh', 4), ('Phuong', 4), ('Chi', 3)]
+ban cua An (khong huong): ['Binh', 'Giang', 'Binh', 'Giang']
+loaded: {'Course': 13, 'Student': 10}
+
+=== Cau 5: mo hinh :Enrollment ===
+loaded: {'Course': 13, 'Student': 10}
+passed_courses tren mo hinh moi, S04: [('MATH101', 7.5), ('CS102', 7.0), ('CS101', 6.5)]
+lich su hoc CS102 cua S04: [{'semester': '2025-1', 'grade': 3.5, 'status': 'failed'}, {'semester': '2025-2', 'grade': 7.0, 'status': 'passed'}]
+loaded: {'Course': 13, 'Student': 10}

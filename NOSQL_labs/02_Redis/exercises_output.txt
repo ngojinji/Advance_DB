@@ -1,0 +1,16 @@
+--- Bai 1 ---
+1 mai 1430
+2 tuan 1300
+3 nam 1200
+thu hang cua nam: 3
+
+--- Bai 2 ---
+HGETALL user:1 -> {'name': 'Linh', 'city': 'Hanoi', 'age': '21'}
+Hanoi -> [{'name': 'Linh', 'city': 'Hanoi', 'age': '21'}, {'name': 'Mai', 'city': 'Hanoi', 'age': '20'}, {'name': 'Tuan', 'city': 'Hanoi', 'age': '24'}]
+Da Nang -> [{'name': 'Nam', 'city': 'Da Nang', 'age': '22'}]
+sau khi Lan chuyen ra Hanoi: ['Linh', 'Mai', 'Lan', 'Tuan']
+
+--- Bai 3 ---
+khong cache: 100.06 s
+co cache   : 1.141 s  (lan dau 1005.5 ms, 99 lan sau trung binh 1.371 ms)
+nhanh hon  : 87.7 lan

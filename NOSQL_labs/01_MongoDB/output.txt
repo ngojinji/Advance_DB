@@ -1,0 +1,40 @@
+--- Bai 1 ---
+So don: 8
+1004 ['_id', 'customer', 'items', 'note', 'shipping', 'status']
+1005 ['_id', 'customer', 'items', 'payments', 'status']
+1006 ['_id', 'customer', 'items', 'rating', 'status', 'tags']
+1007 ['_id', 'cancel', 'customer', 'status']
+1008 ['_id', 'customer', 'invoice_required', 'items', 'status']
+
+find items.sku = BK-01
+{'_id': 1001, 'customer': {'name': 'Linh'}, 'status': 'paid', 'items': [{'sku': 'BK-01'}, {'sku': 'BK-07'}]}
+{'_id': 1003, 'customer': {'name': 'Mai'}, 'status': 'paid', 'items': [{'sku': 'BK-01'}]}
+{'_id': 1004, 'customer': {'name': 'Hung'}, 'status': 'paid', 'items': [{'sku': 'BK-01'}]}
+{'_id': 1008, 'customer': {'name': 'Cong ty ABC'}, 'status': 'paid', 'items': [{'sku': 'BK-01'}, {'sku': 'CB-01'}]}
+
+find items.sku = BK-03
+{'_id': 1002, 'customer': {'name': 'Nam'}, 'status': 'shipped', 'items': [{'sku': 'BK-03'}]}
+{'_id': 1006, 'customer': {'name': 'Tuan'}, 'status': 'shipped', 'items': [{'sku': 'BK-07'}, {'sku': 'BK-03'}]}
+
+--- Bai 2 ---
+{'city': 'Hanoi', 'num_orders': 3, 'revenue': 455.5}
+{'city': 'Da Nang', 'num_orders': 2, 'revenue': 80.0}
+{'city': 'Hue', 'num_orders': 1, 'revenue': 12.5}
+{'city': 'Ho Chi Minh', 'num_orders': 1, 'revenue': 9.9}
+
+--- Bai 3 ---
+So document: 10000
+
+Truoc khi tao index:
+stage: COLLSCAN
+nReturned: 253
+totalKeysExamined: 0
+totalDocsExamined: 10000
+executionTimeMillis: 5
+
+Sau khi tao index:
+stage: FETCH <- IXSCAN
+nReturned: 253
+totalKeysExamined: 253
+totalDocsExamined: 253
+executionTimeMillis: 1

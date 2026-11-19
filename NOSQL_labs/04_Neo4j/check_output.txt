@@ -1,0 +1,9 @@
+loaded: {'Course': 13, 'Student': 10}
+PASS  1 passed_courses
+PASS  2 prerequisite_chain
+PASS  3 eligible_courses
+PASS  4 suggest_friends
+PASS  5 connection
+PASS  6 bottleneck_courses
+PASS  7a record_pass refuses
+PASS  7b record_pass writes
